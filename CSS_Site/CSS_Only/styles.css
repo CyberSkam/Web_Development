@@ -1,0 +1,32 @@
+body {
+    background-color: wheat;
+    margin : 0;
+}
+
+h1 {
+    margin-top : 0;
+}
+
+.top {
+    background-color: teal;
+}
+
+.red {
+    height : 200px;
+    width : 200px;
+    background: red;
+}
+
+.blue {
+    height : 200px;
+    width : 200px;
+    background-color: blue;
+}
+
+.gym {
+    text-decoration: underline;
+}
+
+img { 
+    display: inline-block;
+}

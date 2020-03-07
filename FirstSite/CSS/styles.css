@@ -1,0 +1,24 @@
+
+body {
+    background-color : rgb(245, 111, 23);
+}
+
+hr {
+    border-color: grey;
+    border-style: dotted none none;
+    height: 0px;
+    border-width: 6px;
+    width : 8%;
+}
+
+img {
+    height : 500px;
+}
+
+h1 {
+    color : rgb(8, 110, 38);
+}
+
+h3 {
+    color : rgb(8, 110, 38);
+}
