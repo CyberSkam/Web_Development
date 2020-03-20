@@ -173,3 +173,7 @@ hr {
   .button > .ld {
     font-size: initial
   }
+
+  .button:hover {
+      color : #119987;
+  }
