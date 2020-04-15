@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/todoListDB", {useNewUrlParser : true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://admin-skam:MagisterialSkam10@cluster0-kiyre.mongodb.net/todoListDB", {useNewUrlParser : true, useUnifiedTopology: true });
 
 const itemsSchema = new mongoose.Schema({
     name : String
@@ -167,6 +167,6 @@ app.get("/about", function(req, res) {
     res.render("about");
 });
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
     console.log("Server up and running on port 3000.");
 });
