@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const https = require("https");
 const ejs = require("ejs");
 const lodash = require('lodash');
+const mongoose = require("mongoose");
 
 
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
@@ -12,7 +13,14 @@ const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rho
 
 const app = express();
 
-const posts = [];
+mongoose.connect("mongodb://localhost:27017/blogDB", {useNewUrlParser : true, useUnifiedTopology: true});
+
+const postSchema = mongoose.Schema({
+  title : String,
+  content : String
+});
+
+const Post = mongoose.model("Post", postSchema);
 
 app.set('view engine', 'ejs');
 
@@ -21,7 +29,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/", function(req, res) {
-    res.render("home", {homeContent : homeStartingContent, postArr : posts});
+    Post.find({}, function(err, posts) {
+      res.render("home", {homeContent : homeStartingContent, postArr : posts});
+    });
 });
 
 app.get("/contact", function(req, res) {
@@ -38,22 +48,24 @@ app.get("/compose", function(req, res) {
 
 app.post("/compose", function(req, res) {
   
-  const postObj = {
+  const post = new Post({
     title : req.body.postTitleText,
     content : req.body.postContentText
-  };
-  posts.push(postObj);
-  res.redirect("/");
+  });
+  post.save(function(err){
+    if(!err)
+      res.redirect("/");
+  });
 })
 
-app.get("/posts/:text", function(req, res) {
-  let paramText = lodash.lowerCase(req.params.text);
-  posts.forEach(function(post) {
-    if(lodash.lowerCase(post.title) === paramText){
-      res.render("post", {titleContent : post.title, postContent : post.content});
-    }
+app.get("/posts/:postid", function(req, res) {
+  const paramid = req.params.postid;
+  Post.findOne({_id: paramid}, function(err, post){
+    if(!err)
+      res.render("post", {titleContent: post.title, postContent: post.content});
   });
 });
+
 
 
 
