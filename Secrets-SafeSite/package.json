@@ -1,0 +1,20 @@
+{
+  "name": "secrets-safesite",
+  "version": "1.0.0",
+  "description": "Authenticated and safe ebpage\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dw",
+  "main": "\u001b[2~",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sai Krishna Anand",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "https": "^1.0.0",
+    "mongoose": "^5.9.10",
+    "mongoose-encryption": "^2.0.2"
+  }
+}
